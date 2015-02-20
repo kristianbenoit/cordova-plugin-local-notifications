@@ -397,4 +397,13 @@ public class LocalNotification extends CordovaPlugin {
     protected static NotificationManager getNotificationManager () {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     }
+
+    /**
+     * The webview is disconnected.
+     */
+    @Override
+    public void onDestroy() {
+        deviceready = false;
+        isInBackground = true;
+    }
 }
