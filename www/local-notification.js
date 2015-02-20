@@ -225,15 +225,18 @@ LocalNotification.prototype = {
      * @param {String} state Either "foreground" or "background"
      * @param {String} json  A custom (JSON) string
      */
-    oncancel: function (id, state, json) {}
+    oncancel: function (id, state, json) {},
+
+    /**
+     * Tell this plugin the application is ready to receive events.
+     */
+    applicationready: function() {
+        cordova.exec(null, null, 'LocalNotification', 'deviceready', []);
+    }
 };
 
 var plugin  = new LocalNotification(),
     channel = require('cordova/channel');
-
-channel.deviceready.subscribe( function () {
-    cordova.exec(null, null, 'LocalNotification', 'deviceready', []);
-});
 
 channel.onCordovaReady.subscribe( function () {
     channel.onCordovaInfoReady.subscribe( function () {
